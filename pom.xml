@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.github.raphaelbudde.jpa2puml</groupId>
-    <version>1.2.0-SNAPSHOT</version>
+    <version>1.2.0</version>
     <name>jpa2puml-parent</name>
     <artifactId>jpa2puml-parent</artifactId>
     <description>Generate PlantUML from JPA via jar/class</description>
@@ -24,7 +24,7 @@
         <connection>scm:git:ssh://git@github.com/raphaelbudde/jpa2puml.git</connection>
         <developerConnection>scm:git:ssh://git@github.com/raphaelbudde/jpa2puml.git</developerConnection>
         <url>https://github.com/raphaelbudde/jpa2puml</url>
-        <tag>HEAD</tag>
+        <tag>v1.2.0</tag>
     </scm>
 
     <dependencies>
