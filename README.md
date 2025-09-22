@@ -121,7 +121,8 @@ or to visualize the usage of enums (`-e, --enum-arrow`).
 
 ## Release
 1. `./mvnw release:prepare && ./mvnw release:clean`
-2. Edit release notes in github
+2. `./mvnw --projects '!examples/domain1' deploy`
+3. Edit release notes in github
 
 
 ## Authors

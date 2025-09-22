@@ -1,31 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>de.raphaelbudde.jpa2puml</groupId>
-    <version>1.2.0</version>
-    <name>jpa2puml-parent</name>
     <artifactId>jpa2puml-parent</artifactId>
-    <description>Generate PlantUML from JPA via jar/class</description>
+    <version>1.2.0</version>
     <packaging>pom</packaging>
+
+    <name>jpa2puml parent pom</name>
+    <description>Parent pom for jpa2puml</description>
+
+    <url>https://github.com/raphaelbudde/jpa2puml</url>
 
     <properties>
         <java.version>17</java.version>
         <kotlin.version>2.2.20</kotlin.version>
         <main.class>de.raphaelbudde.jpa2puml.MainKt</main.class>
+        <maven.javadoc.skip>false</maven.javadoc.skip>
     </properties>
+
+    <licenses>
+        <license>
+            <name>Apache-2.0</name>
+            <url>https://opensource.org/license/apache-2-0</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <scm>
+        <url>https://github.com/raphaelbudde/jpa2puml</url>
+        <connection>scm:git:ssh://git@github.com/raphaelbudde/jpa2puml.git</connection>
+    </scm>
+
+    <developers>
+        <developer>
+            <name>Raphael Budde</name>
+            <email>mail@raphaelbudde.de</email>
+        </developer>
+    </developers>
 
     <modules>
         <module>jpa2puml</module>
         <module>examples/domain1</module>
     </modules>
-
-    <scm>
-        <connection>scm:git:ssh://git@github.com/raphaelbudde/jpa2puml.git</connection>
-        <developerConnection>scm:git:ssh://git@github.com/raphaelbudde/jpa2puml.git</developerConnection>
-        <url>https://github.com/raphaelbudde/jpa2puml</url>
-        <tag>v1.2.0</tag>
-    </scm>
 
     <dependencies>
         <dependency>
@@ -66,6 +84,49 @@
                 <groupId>com.github.gantsign.maven</groupId>
                 <artifactId>ktlint-maven-plugin</artifactId>
                 <version>3.3.0</version>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>2.2.1</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.jetbrains.dokka</groupId>
+                <artifactId>dokka-maven-plugin</artifactId>
+                <version>2.0.0</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>dokka</goal>
+                            <goal>javadocJar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>3.2.8</version>
+                <executions>
+                    <execution>
+                        <id>sign-artifacts</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
 
             <plugin>
