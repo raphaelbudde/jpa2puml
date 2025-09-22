@@ -1,0 +1,50 @@
+@startuml
+!pragma useIntermediatePackages false
+hide methods
+hide empty fields
+skinparam groupInheritance 2
+
+abstract com.github.raphaelbudde.jpa2puml.domain1.AbstractEntity {
+  id: UUID <<PK>>
+  version: Long?
+  createdAt: ZonedDateTime
+}
+
+entity com.github.raphaelbudde.jpa2puml.domain1.Address {
+  id: Long <<PK>>
+  name: String
+  street: String
+  city: String
+}
+
+entity com.github.raphaelbudde.jpa2puml.domain1.GridOperator <<AbstractEntity>> {
+  mastrNr: String?
+}
+
+entity com.github.raphaelbudde.jpa2puml.domain1.LineElement <<AbstractEntity>> {
+  type: LineElementType?
+  typeB: LineElementType?
+}
+
+entity com.github.raphaelbudde.jpa2puml.domain1.Text {
+  name: String
+  description: String
+}
+
+entity com.github.raphaelbudde.jpa2puml.domain1.Transformer <<AbstractEntity>> {
+
+}
+
+enum com.github.raphaelbudde.jpa2puml.domain1.LineElementType {
+  TYPE1
+  TYPE2
+}
+
+com.github.raphaelbudde.jpa2puml.domain1.AbstractEntity "1" --> "1" com.github.raphaelbudde.jpa2puml.domain1.Text : text
+com.github.raphaelbudde.jpa2puml.domain1.GridOperator "0..1" --> "0..1" com.github.raphaelbudde.jpa2puml.domain1.Address : address
+com.github.raphaelbudde.jpa2puml.domain1.GridOperator "1..*" --> "0..*" com.github.raphaelbudde.jpa2puml.domain1.Transformer : transformers
+com.github.raphaelbudde.jpa2puml.domain1.LineElement "0..*" --> "0..1" com.github.raphaelbudde.jpa2puml.domain1.LineElement : relatedLineElement
+com.github.raphaelbudde.jpa2puml.domain1.Transformer "0..*" --> "1" com.github.raphaelbudde.jpa2puml.domain1.GridOperator : gridOperator
+com.github.raphaelbudde.jpa2puml.domain1.Transformer "1" --> "0..*" com.github.raphaelbudde.jpa2puml.domain1.LineElement : lineElements
+
+@enduml
