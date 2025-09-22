@@ -73,17 +73,9 @@ class Jpa2Puml : CliktCommand() {
 
     init {
         eagerOption("-V", "--version", help = "Show the version and exit") {
-            throw PrintMessage(version)
+            throw PrintMessage("jpa2puml-$version")
         }
     }
-
-    val version: String
-        get() {
-            val properties = Properties()
-            properties.load(this::class.java.classLoader.getResourceAsStream("version.properties"))
-
-            return "jpa2puml-" + properties.getProperty("version")
-        }
 
     override fun run() {
         if (verbose) {
@@ -107,7 +99,7 @@ class Jpa2Puml : CliktCommand() {
             ).buildClassDiagram(classes)
 
         val puml = pumlClassDiagram.render(
-            "' Generated with $version\n",
+            "' Generated with jpa2puml-$version\n",
         )
 
         outputs
@@ -150,6 +142,16 @@ class Jpa2Puml : CliktCommand() {
                         }
                     }
                 }
+            }
+    }
+
+    companion object {
+        val version: String
+            get() {
+                val properties = Properties()
+                properties.load(this::class.java.classLoader.getResourceAsStream("version.properties"))
+
+                return properties.getProperty("version")
             }
     }
 }

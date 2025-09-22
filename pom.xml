@@ -21,8 +21,8 @@
     </modules>
 
     <scm>
-        <connection>scm:git:ssh://git@github.com:raphaelbudde/jpa2puml.git</connection>
-        <developerConnection>scm:git:ssh://git@github.com:raphaelbudde/jpa2puml.git</developerConnection>
+        <connection>scm:git:ssh://git@github.com/raphaelbudde/jpa2puml.git</connection>
+        <developerConnection>scm:git:ssh://git@github.com/raphaelbudde/jpa2puml.git</developerConnection>
         <url>https://github.com/raphaelbudde/jpa2puml</url>
         <tag>HEAD</tag>
     </scm>

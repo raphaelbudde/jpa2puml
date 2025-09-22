@@ -1,5 +1,6 @@
 package com.github.raphaelbudde.jpa2puml.classes
 
+import com.github.raphaelbudde.jpa2puml.Jpa2Puml
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import java.io.File
@@ -9,7 +10,7 @@ class JavaClassFinderTest {
     fun fromJar() {
         val classes =
             JavaClassFinder()
-                .findClassFiles(File("../examples/domain1/target/examples-domain1-1.2.0-SNAPSHOT.jar"))
+                .findClassFiles(File("../examples/domain1/target/examples-domain1-${Jpa2Puml.version}.jar"))
 
         assertThat(classes).hasSize(8)
     }
