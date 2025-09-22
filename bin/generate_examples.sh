@@ -1,10 +1,9 @@
 #!/usr/bin/env bash
 
 cd $(dirname "$0")
-pwd
 
 function jpa2puml() {
-    java  --enable-native-access=ALL-UNNAMED -jar ../jpa2puml/target/jpa2puml-1.2.0-SNAPSHOT-jar-with-dependencies.jar $@
+    java  --enable-native-access=ALL-UNNAMED -jar ../jpa2puml/target/jpa2puml-*-jar-with-dependencies.jar $@
 }
 
 jpa2puml -o ../images/domain1.png ../examples/domain1/target/classes/

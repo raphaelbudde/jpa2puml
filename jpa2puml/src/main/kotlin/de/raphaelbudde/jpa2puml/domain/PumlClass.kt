@@ -1,6 +1,6 @@
-package com.github.raphaelbudde.jpa2puml.domain
+package de.raphaelbudde.jpa2puml.domain
 
-import com.github.raphaelbudde.jpa2puml.classes.withoutPackage
+import de.raphaelbudde.jpa2puml.classes.withoutPackage
 
 data class PumlClass(
     val classType: PumlClassType = PumlClassType.`class`,

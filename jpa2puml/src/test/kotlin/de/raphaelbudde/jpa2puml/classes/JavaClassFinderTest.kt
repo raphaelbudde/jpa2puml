@@ -1,6 +1,6 @@
-package com.github.raphaelbudde.jpa2puml.classes
+package de.raphaelbudde.jpa2puml.classes
 
-import com.github.raphaelbudde.jpa2puml.Jpa2Puml
+import de.raphaelbudde.jpa2puml.Jpa2Puml
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import java.io.File
@@ -19,18 +19,18 @@ class JavaClassFinderTest {
     fun fromDirectory() {
         val classes =
             JavaClassFinder()
-                .findClassFiles(File("../examples/domain1/target/classes/com/github/raphaelbudde/jpa2puml/domain1"))
+                .findClassFiles(File("../examples/domain1/target/classes/de/raphaelbudde/jpa2puml/domain1"))
 
         assertThat(classes).hasSize(8)
 
         val classNames = classes.map { it.className }
-        assertThat(classNames).contains("com.github.raphaelbudde.jpa2puml.domain1.AbstractEntity")
-        assertThat(classNames).contains("com.github.raphaelbudde.jpa2puml.domain1.GridOperator")
-        assertThat(classNames).contains("com.github.raphaelbudde.jpa2puml.domain1.LineElement")
-        assertThat(classNames).contains("com.github.raphaelbudde.jpa2puml.domain1.Transformer")
-        assertThat(classNames).contains("com.github.raphaelbudde.jpa2puml.domain1.LineElementType")
-        assertThat(classNames).contains("com.github.raphaelbudde.jpa2puml.domain1.Address")
-        assertThat(classNames).contains("com.github.raphaelbudde.jpa2puml.domain1.UnusedEnum")
-        assertThat(classNames).contains("com.github.raphaelbudde.jpa2puml.domain1.Text")
+        assertThat(classNames).contains("de.raphaelbudde.jpa2puml.domain1.AbstractEntity")
+        assertThat(classNames).contains("de.raphaelbudde.jpa2puml.domain1.GridOperator")
+        assertThat(classNames).contains("de.raphaelbudde.jpa2puml.domain1.LineElement")
+        assertThat(classNames).contains("de.raphaelbudde.jpa2puml.domain1.Transformer")
+        assertThat(classNames).contains("de.raphaelbudde.jpa2puml.domain1.LineElementType")
+        assertThat(classNames).contains("de.raphaelbudde.jpa2puml.domain1.Address")
+        assertThat(classNames).contains("de.raphaelbudde.jpa2puml.domain1.UnusedEnum")
+        assertThat(classNames).contains("de.raphaelbudde.jpa2puml.domain1.Text")
     }
 }

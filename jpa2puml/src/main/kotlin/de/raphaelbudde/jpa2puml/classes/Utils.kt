@@ -1,4 +1,4 @@
-package com.github.raphaelbudde.jpa2puml.classes
+package de.raphaelbudde.jpa2puml.classes
 
 /**
  * e.g. "com.foo.Bar" -> "Bar"
@@ -8,8 +8,8 @@ fun String.withoutPackage(): String = this
     .last()
 
 /**
- * Signature might be "Ljava/util/List<+Lcom/github/raphaelbudde/jpa2puml/domain1/LineElement;>;"
- * return will be listOf("com.github.raphaelbudde.jpa2puml.domain1.LineElement")
+ * Signature might be "Ljava/util/List<+Lde/raphaelbudde/jpa2puml/domain1/LineElement;>;"
+ * return will be listOf("de.raphaelbudde.jpa2puml.domain1.LineElement")
  */
 fun getTypeParametersFromSignature(signature: String): List<String> {
     val matchResult =
@@ -28,7 +28,7 @@ fun getTypeParametersFromSignature(signature: String): List<String> {
 }
 
 /**
- * +Lcom/github/raphaelbudde/jpa2puml/domain1/LineElement -> com.github.raphaelbudde.jpa2puml.domain1.LineElement
+ * +Lde/raphaelbudde/jpa2puml/domain1/LineElement -> de.raphaelbudde.jpa2puml.domain1.LineElement
  */
 private fun getSingleTypeParameterFromSignature(signature: String): String = signature
     .trimStart('+')

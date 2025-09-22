@@ -1,4 +1,4 @@
-package com.github.raphaelbudde.jpa2puml.domain
+package de.raphaelbudde.jpa2puml.domain
 
 @Suppress("EnumEntryName")
 enum class PumlClassType {

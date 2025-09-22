@@ -47,7 +47,7 @@ Arguments:
 
 ### Generate and print puml from directory with classes
 
-`jpa2puml examples/domain1/target/classes/com/github/raphaelbudde/jpa2puml`
+`jpa2puml examples/domain1/target/classes/de/raphaelbudde/jpa2puml`
 
 ### Generate and print puml from jar
 

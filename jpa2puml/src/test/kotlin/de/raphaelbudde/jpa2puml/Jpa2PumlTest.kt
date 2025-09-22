@@ -1,9 +1,9 @@
-package com.github.raphaelbudde.jpa2puml
+package de.raphaelbudde.jpa2puml
 
-import com.github.raphaelbudde.jpa2puml.classes.JavaClassFinder
-import com.github.raphaelbudde.jpa2puml.classes.PumlClassBuilder
-import com.github.raphaelbudde.jpa2puml.domain.PumlClass
-import com.github.raphaelbudde.jpa2puml.domain.PumlClassDiagram
+import de.raphaelbudde.jpa2puml.classes.JavaClassFinder
+import de.raphaelbudde.jpa2puml.classes.PumlClassBuilder
+import de.raphaelbudde.jpa2puml.domain.PumlClass
+import de.raphaelbudde.jpa2puml.domain.PumlClassDiagram
 import org.apache.bcel.classfile.JavaClass
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
@@ -18,7 +18,7 @@ class Jpa2PumlTest {
     @BeforeEach
     fun init() {
         classes =
-            JavaClassFinder().findClassFiles(File("../examples/domain1/target/classes/com/github/raphaelbudde/jpa2puml/domain1"))
+            JavaClassFinder().findClassFiles(File("../examples/domain1/target/classes/de/raphaelbudde/jpa2puml/domain1"))
         classDiagram = PumlClassBuilder(
             excludedFieldPatterns = listOf(Regex("\\$.*")), // ignore $VALUES and $ENTRIES from kotlin enums
         ).buildClassDiagram(classes)
@@ -39,7 +39,7 @@ class Jpa2PumlTest {
         val abstractEntity = getPumlClass("AbstractEntity")
 
         assertThat(abstractEntity!!.renderClass()).isEqualTo(
-            """abstract com.github.raphaelbudde.jpa2puml.domain1.AbstractEntity {
+            """abstract de.raphaelbudde.jpa2puml.domain1.AbstractEntity {
   id: UUID <<PK>>
   version: Long?
   createdAt: ZonedDateTime
@@ -47,7 +47,7 @@ class Jpa2PumlTest {
 """,
         )
         assertThat(abstractEntity.renderRelationsAndNotes()).isEqualTo(
-            """com.github.raphaelbudde.jpa2puml.domain1.AbstractEntity "1" --> "1" com.github.raphaelbudde.jpa2puml.domain1.Text : text
+            """de.raphaelbudde.jpa2puml.domain1.AbstractEntity "1" --> "1" de.raphaelbudde.jpa2puml.domain1.Text : text
 """,
         )
     }
@@ -56,15 +56,15 @@ class Jpa2PumlTest {
     fun renderGridOperator() {
         val gridOperator = getPumlClass("GridOperator")
         assertThat(gridOperator!!.renderClass()).isEqualTo(
-            """entity com.github.raphaelbudde.jpa2puml.domain1.GridOperator <<AbstractEntity>> {
+            """entity de.raphaelbudde.jpa2puml.domain1.GridOperator <<AbstractEntity>> {
   mastrNr: String?
 }
 """,
         )
 
         assertThat(gridOperator.renderRelationsAndNotes()).isEqualTo(
-            """com.github.raphaelbudde.jpa2puml.domain1.GridOperator "0..1" --> "0..1" com.github.raphaelbudde.jpa2puml.domain1.Address : address
-com.github.raphaelbudde.jpa2puml.domain1.GridOperator "1..*" --> "0..*" com.github.raphaelbudde.jpa2puml.domain1.Transformer : transformers
+            """de.raphaelbudde.jpa2puml.domain1.GridOperator "0..1" --> "0..1" de.raphaelbudde.jpa2puml.domain1.Address : address
+de.raphaelbudde.jpa2puml.domain1.GridOperator "1..*" --> "0..*" de.raphaelbudde.jpa2puml.domain1.Transformer : transformers
 """,
         )
     }
@@ -73,7 +73,7 @@ com.github.raphaelbudde.jpa2puml.domain1.GridOperator "1..*" --> "0..*" com.gith
     fun renderAddress() {
         val abstractEntity = getPumlClass("Address")
         assertThat(abstractEntity!!.renderClass()).isEqualTo(
-            """entity com.github.raphaelbudde.jpa2puml.domain1.Address {
+            """entity de.raphaelbudde.jpa2puml.domain1.Address {
   id: Long <<PK>>
   name: String
   street: String
@@ -87,15 +87,15 @@ com.github.raphaelbudde.jpa2puml.domain1.GridOperator "1..*" --> "0..*" com.gith
     fun renderTransformer() {
         val transformer = getPumlClass("Transformer")
         assertThat(transformer!!.renderClass()).isEqualTo(
-            """entity com.github.raphaelbudde.jpa2puml.domain1.Transformer <<AbstractEntity>> {
+            """entity de.raphaelbudde.jpa2puml.domain1.Transformer <<AbstractEntity>> {
 
 }
 """,
         )
 
         assertThat(transformer.renderRelationsAndNotes()).isEqualTo(
-            """com.github.raphaelbudde.jpa2puml.domain1.Transformer "0..*" --> "1" com.github.raphaelbudde.jpa2puml.domain1.GridOperator : gridOperator
-com.github.raphaelbudde.jpa2puml.domain1.Transformer "1" --> "0..*" com.github.raphaelbudde.jpa2puml.domain1.LineElement : lineElements
+            """de.raphaelbudde.jpa2puml.domain1.Transformer "0..*" --> "1" de.raphaelbudde.jpa2puml.domain1.GridOperator : gridOperator
+de.raphaelbudde.jpa2puml.domain1.Transformer "1" --> "0..*" de.raphaelbudde.jpa2puml.domain1.LineElement : lineElements
 """,
         )
     }
@@ -106,7 +106,7 @@ com.github.raphaelbudde.jpa2puml.domain1.Transformer "1" --> "0..*" com.github.r
         val lineElementFull = getPumlClassFull("LineElement")!!
 
         assertThat(lineElement.renderClass()).isEqualTo(
-            """entity com.github.raphaelbudde.jpa2puml.domain1.LineElement <<AbstractEntity>> {
+            """entity de.raphaelbudde.jpa2puml.domain1.LineElement <<AbstractEntity>> {
   type: LineElementType?
   typeB: LineElementType?
 }
@@ -114,14 +114,14 @@ com.github.raphaelbudde.jpa2puml.domain1.Transformer "1" --> "0..*" com.github.r
         )
 
         assertThat(lineElement.renderRelationsAndNotes()).isEqualTo(
-            """com.github.raphaelbudde.jpa2puml.domain1.LineElement "0..*" --> "0..1" com.github.raphaelbudde.jpa2puml.domain1.LineElement : relatedLineElement
+            """de.raphaelbudde.jpa2puml.domain1.LineElement "0..*" --> "0..1" de.raphaelbudde.jpa2puml.domain1.LineElement : relatedLineElement
 """,
         )
 
         assertThat(lineElementFull.renderRelationsAndNotes()).isEqualTo(
-            """com.github.raphaelbudde.jpa2puml.domain1.LineElement "0..*" --> "0..1" com.github.raphaelbudde.jpa2puml.domain1.LineElement : relatedLineElement
-com.github.raphaelbudde.jpa2puml.domain1.LineElement -up-|> com.github.raphaelbudde.jpa2puml.domain1.AbstractEntity
-com.github.raphaelbudde.jpa2puml.domain1.LineElement .. com.github.raphaelbudde.jpa2puml.domain1.LineElementType
+            """de.raphaelbudde.jpa2puml.domain1.LineElement "0..*" --> "0..1" de.raphaelbudde.jpa2puml.domain1.LineElement : relatedLineElement
+de.raphaelbudde.jpa2puml.domain1.LineElement -up-|> de.raphaelbudde.jpa2puml.domain1.AbstractEntity
+de.raphaelbudde.jpa2puml.domain1.LineElement .. de.raphaelbudde.jpa2puml.domain1.LineElementType
 """,
         )
     }
@@ -130,7 +130,7 @@ com.github.raphaelbudde.jpa2puml.domain1.LineElement .. com.github.raphaelbudde.
     fun renderEnum() {
         val abstractEntity = getPumlClass("LineElementType")
         assertThat(abstractEntity!!.renderClass()).isEqualTo(
-            """enum com.github.raphaelbudde.jpa2puml.domain1.LineElementType {
+            """enum de.raphaelbudde.jpa2puml.domain1.LineElementType {
   TYPE1
   TYPE2
 }

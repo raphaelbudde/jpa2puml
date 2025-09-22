@@ -1,4 +1,4 @@
-package com.github.raphaelbudde.jpa2puml.domain1
+package de.raphaelbudde.jpa2puml.domain1
 
 import jakarta.persistence.Column
 import jakarta.persistence.Embeddable

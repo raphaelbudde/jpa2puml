@@ -1,4 +1,4 @@
-package com.github.raphaelbudde.jpa2puml.process
+package de.raphaelbudde.jpa2puml.process
 
 import java.io.OutputStream
 

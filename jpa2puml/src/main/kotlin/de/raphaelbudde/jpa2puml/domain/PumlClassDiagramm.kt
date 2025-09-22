@@ -1,4 +1,4 @@
-package com.github.raphaelbudde.jpa2puml.domain
+package de.raphaelbudde.jpa2puml.domain
 
 import java.io.StringWriter
 

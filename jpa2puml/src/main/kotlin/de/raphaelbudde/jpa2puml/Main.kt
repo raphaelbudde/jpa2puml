@@ -1,4 +1,4 @@
-package com.github.raphaelbudde.jpa2puml
+package de.raphaelbudde.jpa2puml
 
 import com.github.ajalt.clikt.core.CliktCommand
 import com.github.ajalt.clikt.core.PrintMessage
@@ -13,11 +13,11 @@ import com.github.ajalt.clikt.parameters.options.help
 import com.github.ajalt.clikt.parameters.options.multiple
 import com.github.ajalt.clikt.parameters.options.option
 import com.github.ajalt.clikt.parameters.types.file
-import com.github.raphaelbudde.jpa2puml.classes.JavaClassFinder
-import com.github.raphaelbudde.jpa2puml.classes.PumlClassBuilder
-import com.github.raphaelbudde.jpa2puml.process.PlantumlOutputType
-import com.github.raphaelbudde.jpa2puml.process.PlantumlProcess.isInstalled
-import com.github.raphaelbudde.jpa2puml.process.PlantumlProcess.transformPumlTo
+import de.raphaelbudde.jpa2puml.classes.JavaClassFinder
+import de.raphaelbudde.jpa2puml.classes.PumlClassBuilder
+import de.raphaelbudde.jpa2puml.process.PlantumlOutputType
+import de.raphaelbudde.jpa2puml.process.PlantumlProcess.isInstalled
+import de.raphaelbudde.jpa2puml.process.PlantumlProcess.transformPumlTo
 import org.slf4j.simple.SimpleLogger
 import java.io.File
 import java.util.*

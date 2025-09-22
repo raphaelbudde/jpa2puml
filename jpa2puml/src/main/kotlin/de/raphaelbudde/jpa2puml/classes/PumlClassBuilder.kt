@@ -1,10 +1,10 @@
-package com.github.raphaelbudde.jpa2puml.classes
+package de.raphaelbudde.jpa2puml.classes
 
-import com.github.raphaelbudde.jpa2puml.domain.PumlClass
-import com.github.raphaelbudde.jpa2puml.domain.PumlClassDiagram
-import com.github.raphaelbudde.jpa2puml.domain.PumlClassType
-import com.github.raphaelbudde.jpa2puml.domain.PumlField
-import com.github.raphaelbudde.jpa2puml.domain.PumlRelation
+import de.raphaelbudde.jpa2puml.domain.PumlClass
+import de.raphaelbudde.jpa2puml.domain.PumlClassDiagram
+import de.raphaelbudde.jpa2puml.domain.PumlClassType
+import de.raphaelbudde.jpa2puml.domain.PumlField
+import de.raphaelbudde.jpa2puml.domain.PumlRelation
 import org.apache.bcel.classfile.Field
 import org.apache.bcel.classfile.JavaClass
 import org.apache.bcel.classfile.Signature

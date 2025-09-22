@@ -2,7 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.github.raphaelbudde.jpa2puml</groupId>
+    <groupId>de.raphaelbudde.jpa2puml</groupId>
     <version>1.2.0-SNAPSHOT</version>
     <name>jpa2puml-parent</name>
     <artifactId>jpa2puml-parent</artifactId>
@@ -12,7 +12,7 @@
     <properties>
         <java.version>17</java.version>
         <kotlin.version>2.2.20</kotlin.version>
-        <main.class>com.github.raphaelbudde.jpa2puml.MainKt</main.class>
+        <main.class>de.raphaelbudde.jpa2puml.MainKt</main.class>
     </properties>
 
     <modules>
@@ -74,6 +74,17 @@
                 <version>3.1.1</version>
                 <configuration>
                     <tagNameFormat>v@{project.version}</tagNameFormat>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.sonatype.central</groupId>
+                <artifactId>central-publishing-maven-plugin</artifactId>
+                <version>0.8.0</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <publishingServerId>central</publishingServerId>
+                    <autoPublish>false</autoPublish>
                 </configuration>
             </plugin>
         </plugins>

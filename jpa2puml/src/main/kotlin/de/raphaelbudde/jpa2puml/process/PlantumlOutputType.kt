@@ -1,4 +1,4 @@
-package com.github.raphaelbudde.jpa2puml.process
+package de.raphaelbudde.jpa2puml.process
 
 @Suppress("EnumEntryName")
 enum class PlantumlOutputType {

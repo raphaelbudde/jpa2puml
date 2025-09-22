@@ -1,4 +1,4 @@
-package com.github.raphaelbudde.jpa2puml.classes
+package de.raphaelbudde.jpa2puml.classes
 
 import org.apache.bcel.classfile.AnnotationEntry
 
