@@ -121,8 +121,9 @@ or to visualize the usage of enums (`-e, --enum-arrow`).
 
 ## Release
 1. `./mvnw release:prepare && ./mvnw release:clean`
-2. `./mvnw --projects '!examples/domain1' deploy`
-3. Edit release notes in github
+2. `./mvnw clean install -P sign-and-publish`
+3. `./mvnw --projects '!examples/domain1,!examples/maven-plugin-test' deploy -P sign-and-publish`
+4. Edit release notes in github
 
 
 ## Authors

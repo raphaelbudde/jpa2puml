@@ -7,11 +7,11 @@
         <groupId>de.raphaelbudde.jpa2puml</groupId>
         <artifactId>jpa2puml-parent</artifactId>
         <version>1.2.0</version>
-        <relativePath>../../pom.xml</relativePath>
+        <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <artifactId>examples-domain1</artifactId>
-    <name>jpa2puml example domain1</name>
+    <artifactId>maven-plugin-test</artifactId>
+    <name>maven plugin test</name>
     <packaging>jar</packaging>
 
     <dependencies>
@@ -21,5 +21,22 @@
             <version>3.2.0</version>
         </dependency>
     </dependencies>
+
+    <build>
+        <directory>${project.basedir}/target</directory>
+        <outputDirectory>${project.build.directory}/classes</outputDirectory>
+
+        <plugins>
+            <plugin>
+                <groupId>de.raphaelbudde.jpa2puml</groupId>
+                <artifactId>jpa2puml-maven-plugin</artifactId>
+                <version>1.2.0</version>
+
+                <configuration>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
 
 </project>
