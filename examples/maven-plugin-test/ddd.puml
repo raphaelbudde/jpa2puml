@@ -1,5 +1,5 @@
 @startuml
-' Generated with jpa2puml-1.2.0
+' Generated with jpa2puml-1.2.1-SNAPSHOT
 
 !pragma useIntermediatePackages false
 hide methods

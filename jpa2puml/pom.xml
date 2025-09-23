@@ -5,12 +5,12 @@
     <parent>
         <groupId>de.raphaelbudde.jpa2puml</groupId>
         <artifactId>jpa2puml-parent</artifactId>
-        <version>1.2.0</version>
+        <version>1.2.1-SNAPSHOT-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
     <artifactId>jpa2puml</artifactId>
-    <version>1.2.0</version>
+    <version>1.2.1-SNAPSHOT-SNAPSHOT</version>
     <name>jpa2puml cli</name>
     <description>Generate PlantUML from JPA via jar/class</description>
     <packaging>jar</packaging>
@@ -35,7 +35,7 @@
         <dependency>
             <groupId>de.raphaelbudde.jpa2puml</groupId>
             <artifactId>examples-domain1</artifactId>
-            <version>1.2.0</version>
+            <version>1.2.1-SNAPSHOT-SNAPSHOT</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
