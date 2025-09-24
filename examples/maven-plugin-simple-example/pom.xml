@@ -9,8 +9,8 @@
         <relativePath>../../pom.xml</relativePath>
     </parent>
 
-    <artifactId>examples-domain1</artifactId>
-    <name>jpa2puml example domain1</name>
+    <artifactId>maven-plugin-simple-example</artifactId>
+    <name>jpa2puml maven plugin simple example</name>
     <packaging>jar</packaging>
 
     <dependencies>
@@ -20,5 +20,24 @@
             <version>3.2.0</version>
         </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>de.raphaelbudde.jpa2puml</groupId>
+                <artifactId>jpa2puml-maven-plugin</artifactId>
+                <version>1.2.2-SNAPSHOT</version>
+                <executions>
+                    <execution>
+                        <phase>process-classes</phase>
+                        <goals>
+                            <goal>jpa2puml</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
 
 </project>

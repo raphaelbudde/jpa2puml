@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
@@ -9,8 +10,8 @@
         <relativePath>../../pom.xml</relativePath>
     </parent>
 
-    <artifactId>maven-plugin-test</artifactId>
-    <name>maven plugin test</name>
+    <artifactId>maven-plugin-full-example</artifactId>
+    <name>jpa2puml maven plugin full example</name>
     <packaging>jar</packaging>
 
     <dependencies>
@@ -29,6 +30,7 @@
                 <version>1.2.2-SNAPSHOT</version>
                 <executions>
                     <execution>
+                        <phase>process-classes</phase>
                         <goals>
                             <goal>jpa2puml</goal>
                         </goals>
@@ -56,8 +58,8 @@
                         <outputFile>${project.build.directory}/${project.artifactId}-${project.version}.puml</outputFile>
                         <outputFile>${project.build.directory}/aaa.puml</outputFile>
                         <outputFile>${project.build.directory}/bbb/bbb.puml</outputFile>
-<!--                        <outputFile>../ccc/ccc.puml</outputFile>-->
-<!--                        <outputFile>${project.basedir}/ddd.puml</outputFile>-->
+                        <!--                        <outputFile>../ccc/ccc.puml</outputFile>-->
+                        <!--                        <outputFile>${project.basedir}/ddd.puml</outputFile>-->
                     </outputFiles>
                 </configuration>
             </plugin>

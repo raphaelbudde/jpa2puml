@@ -43,8 +43,9 @@
     <modules>
         <module>jpa2puml</module>
         <module>jpa2puml-maven-plugin</module>
-        <module>examples/domain1</module>
-        <module>examples/maven-plugin-test</module>
+        <module>examples/example-domain</module>
+        <module>examples/maven-plugin-full-example</module>
+        <module>examples/maven-plugin-simple-example</module>
     </modules>
 
     <dependencies>

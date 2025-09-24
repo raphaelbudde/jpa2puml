@@ -10,7 +10,7 @@ class JavaClassFinderTest {
     fun fromJar() {
         val classes =
             JavaClassFinder()
-                .findClassFiles(File("../examples/domain1/target/examples-domain1-${Jpa2Puml.version}.jar"))
+                .findClassFiles(File("../examples/example-domain/target/example-domain-${Jpa2Puml.version}.jar"))
 
         assertThat(classes).hasSize(8)
     }
@@ -19,7 +19,7 @@ class JavaClassFinderTest {
     fun fromDirectory() {
         val classes =
             JavaClassFinder()
-                .findClassFiles(File("../examples/domain1/target/classes/de/raphaelbudde/jpa2puml/domain1"))
+                .findClassFiles(File("../examples/example-domain/target/classes/de/raphaelbudde/jpa2puml/domain1"))
 
         assertThat(classes).hasSize(8)
 

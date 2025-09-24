@@ -18,7 +18,7 @@ class Jpa2PumlTest {
     @BeforeEach
     fun init() {
         classes =
-            JavaClassFinder().findClassFiles(File("../examples/domain1/target/classes/de/raphaelbudde/jpa2puml/domain1"))
+            JavaClassFinder().findClassFiles(File("../examples/example-domain/target/classes/de/raphaelbudde/jpa2puml/domain1"))
         classDiagram = PumlClassBuilder(
             excludedFieldPatterns = listOf(Regex("\\$.*")), // ignore $VALUES and $ENTRIES from kotlin enums
         ).buildClassDiagram(classes)

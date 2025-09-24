@@ -12,10 +12,7 @@ import org.apache.maven.plugins.annotations.Parameter
 import org.apache.maven.plugins.annotations.ResolutionScope
 import org.apache.maven.project.MavenProject
 import java.io.File
-import java.nio.file.Files
-import java.nio.file.Paths
 import kotlin.collections.forEach
-import kotlin.collections.ifEmpty
 
 /**
  * A Maven plugin which creates puml from classes.
@@ -38,18 +35,18 @@ class Jpa2pumlMojo : AbstractMojo() {
     private lateinit var directory: File
 
     @Parameter(name = "excludedDirectories", required = false)
-    private lateinit var excludedDirectories: List<String>
+    private var excludedDirectories: List<String>? = null
 
     @Parameter(name = "excludedFiles", required = false)
-    private lateinit var excludedFiles: List<String>
+    private var excludedFiles: List<String>? = null
 
     @Parameter(name = "excludedClassNames", required = false)
-    private lateinit var excludedClassNames: List<String>
+    private var excludedClassNames: List<String>? = null
 
     @Parameter(name = "excludedFields", required = false)
-    private lateinit var excludedFields: List<String>
+    private var excludedFields: List<String>? = null
 
-    @Parameter(name = "outputFiles", required = false, defaultValue = $$"${project.artifactId}-${project.version}.puml")
+    @Parameter(name = "outputFiles", required = false, defaultValue = $$"${project.build.directory}/${project.artifactId}-${project.version}.puml")
     private var outputFiles: List<String>? = null
 
     override fun execute() {
@@ -58,13 +55,15 @@ class Jpa2pumlMojo : AbstractMojo() {
             return
         }
 
-        val excludedDirectoryPatterns: List<Regex> = excludedDirectories.map { Regex(it) }
-        val excludedFilesPattern: List<Regex> = excludedFiles.map { Regex(it) }
-        val excludedClassNamePatterns: List<Regex> = excludedClassNames.map { Regex(it) }
-        val excludedFieldPatterns: List<Regex> = excludedFields.map { Regex(it) }
+        val excludedDirectoryPatterns: List<Regex> = excludedDirectories?.map { Regex(it) } ?: emptyList()
+        val excludedFilesPattern: List<Regex> = excludedFiles?.map { Regex(it) } ?: emptyList()
+        val excludedClassNamePatterns: List<Regex> = excludedClassNames?.map { Regex(it) } ?: emptyList()
+        val excludedFieldPatterns: List<Regex> = excludedFields?.map { Regex(it) } ?: emptyList()
 
         val inheritanceArrow = true
         val enumArrow = true
+
+        // TODO: search in all project.compileClasspathElements?
 
         val classes =
             JavaClassFinder(

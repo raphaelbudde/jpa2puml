@@ -2,10 +2,9 @@ package de.raphaelbudde.jpa2puml.maven
 
 import org.apache.maven.plugin.testing.AbstractMojoTestCase
 import org.apache.maven.project.MavenProject
-import org.junit.jupiter.api.Assertions.assertNotNull
 import java.io.File
 
-class MyMojoTest : AbstractMojoTestCase() {
+class Jpa2pumlMojoTest : AbstractMojoTestCase() {
 
     override fun setUp() {
         super.setUp()
@@ -15,7 +14,7 @@ class MyMojoTest : AbstractMojoTestCase() {
         super.tearDown()
     }
 
-    public fun testRunMojo() {
+    fun testRunMojo() {
         val pom = getTestFile(getBasedir(), "src/test/resources/test-pom.xml")
         assertNotNull(pom)
         assertTrue(pom.exists())
