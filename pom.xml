@@ -43,9 +43,11 @@
     <modules>
         <module>jpa2puml</module>
         <module>jpa2puml-maven-plugin</module>
+        <module>jpa2puml-gradle-plugin</module>
         <module>examples/example-domain</module>
         <module>examples/maven-plugin-full-example</module>
         <module>examples/maven-plugin-simple-example</module>
+<!--        <module>examples/gradle-plugin-simple-example</module>-->
     </modules>
 
     <dependencies>
