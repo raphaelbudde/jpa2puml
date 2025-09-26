@@ -4,7 +4,7 @@
 
     <groupId>de.raphaelbudde.jpa2puml</groupId>
     <artifactId>jpa2puml-parent</artifactId>
-    <version>1.2.2-SNAPSHOT</version>
+    <version>1.2.2</version>
     <packaging>pom</packaging>
 
     <name>jpa2puml parent pom</name>
@@ -29,7 +29,7 @@
     <scm>
         <url>https://github.com/raphaelbudde/jpa2puml</url>
         <connection>scm:git:ssh://git@github.com/raphaelbudde/jpa2puml.git</connection>
-      <tag>HEAD</tag>
+      <tag>v1.2.2</tag>
   </scm>
 
     <developers>
