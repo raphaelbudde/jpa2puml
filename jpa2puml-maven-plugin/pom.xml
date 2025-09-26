@@ -16,7 +16,6 @@
     <packaging>maven-plugin</packaging>
 
     <properties>
-<!--        <mavenVersion>4.0.0-rc-4</mavenVersion>-->
         <mavenVersion>3.9.11</mavenVersion>
         <mavenPluginToolsVersion>3.15.1</mavenPluginToolsVersion>
         <mavenPluginTestingVersion>3.3.0</mavenPluginTestingVersion>
@@ -25,7 +24,7 @@
     <dependencies>
         <dependency>
             <groupId>de.raphaelbudde.jpa2puml</groupId>
-            <artifactId>jpa2puml</artifactId>
+            <artifactId>jpa2puml-core</artifactId>
             <version>1.2.2-SNAPSHOT</version>
         </dependency>
 
@@ -83,6 +82,12 @@
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
             <version>5.12.2</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.mockk</groupId>
+            <artifactId>mockk-jvm</artifactId>
+            <version>1.14.5</version>
             <scope>test</scope>
         </dependency>
     </dependencies>

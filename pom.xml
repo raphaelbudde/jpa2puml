@@ -15,7 +15,6 @@
     <properties>
         <java.version>17</java.version>
         <kotlin.version>2.2.20</kotlin.version>
-        <main.class>de.raphaelbudde.jpa2puml.MainKt</main.class>
         <maven.javadoc.skip>false</maven.javadoc.skip>
     </properties>
 
@@ -41,7 +40,8 @@
     </developers>
 
     <modules>
-        <module>jpa2puml</module>
+        <module>jpa2puml-core</module>
+        <module>jpa2puml-cli</module>
         <module>jpa2puml-maven-plugin</module>
         <module>examples/example-domain</module>
         <module>examples/maven-plugin-full-example</module>

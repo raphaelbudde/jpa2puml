@@ -1,0 +1,54 @@
+@startuml
+!pragma useIntermediatePackages false
+hide methods
+hide empty fields
+skinparam groupInheritance 2
+
+abstract de.raphaelbudde.jpa2puml.example.domain1.AbstractEntity {
+  id: UUID <<PK>>
+  version: Long?
+  createdAt: ZonedDateTime
+}
+
+entity de.raphaelbudde.jpa2puml.example.domain1.Address {
+  id: Long <<PK>>
+  name: String
+  street: String
+  city: String
+}
+
+entity de.raphaelbudde.jpa2puml.example.domain1.GridOperator <<AbstractEntity>> {
+  mastrNr: String?
+}
+
+entity de.raphaelbudde.jpa2puml.example.domain1.LineElement <<AbstractEntity>> {
+  type: LineElementType?
+  typeB: LineElementType?
+}
+
+entity de.raphaelbudde.jpa2puml.example.domain1.Text {
+  name: String
+  description: String
+}
+
+entity de.raphaelbudde.jpa2puml.example.domain1.Transformer <<AbstractEntity>> {
+
+}
+
+enum de.raphaelbudde.jpa2puml.example.domain1.LineElementType {
+  TYPE1
+  TYPE2
+}
+
+de.raphaelbudde.jpa2puml.example.domain1.AbstractEntity "1" --> "1" de.raphaelbudde.jpa2puml.example.domain1.Text : text
+de.raphaelbudde.jpa2puml.example.domain1.GridOperator "0..1" --> "0..1" de.raphaelbudde.jpa2puml.example.domain1.Address : address
+de.raphaelbudde.jpa2puml.example.domain1.GridOperator "1..*" --> "0..*" de.raphaelbudde.jpa2puml.example.domain1.Transformer : transformers
+de.raphaelbudde.jpa2puml.example.domain1.GridOperator -up-|> de.raphaelbudde.jpa2puml.example.domain1.AbstractEntity
+de.raphaelbudde.jpa2puml.example.domain1.LineElement "0..*" --> "0..1" de.raphaelbudde.jpa2puml.example.domain1.LineElement : relatedLineElement
+de.raphaelbudde.jpa2puml.example.domain1.LineElement -up-|> de.raphaelbudde.jpa2puml.example.domain1.AbstractEntity
+de.raphaelbudde.jpa2puml.example.domain1.LineElement .. de.raphaelbudde.jpa2puml.example.domain1.LineElementType
+de.raphaelbudde.jpa2puml.example.domain1.Transformer "0..*" --> "1" de.raphaelbudde.jpa2puml.example.domain1.GridOperator : gridOperator
+de.raphaelbudde.jpa2puml.example.domain1.Transformer "1" --> "0..*" de.raphaelbudde.jpa2puml.example.domain1.LineElement : lineElements
+de.raphaelbudde.jpa2puml.example.domain1.Transformer -up-|> de.raphaelbudde.jpa2puml.example.domain1.AbstractEntity
+
+@enduml

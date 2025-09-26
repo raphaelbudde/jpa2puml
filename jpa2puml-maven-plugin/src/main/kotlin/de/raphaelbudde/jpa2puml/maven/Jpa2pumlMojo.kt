@@ -1,10 +1,9 @@
 package de.raphaelbudde.jpa2puml.maven
 
-import de.raphaelbudde.jpa2puml.Jpa2Puml.Companion.version
-import de.raphaelbudde.jpa2puml.classes.JavaClassFinder
-import de.raphaelbudde.jpa2puml.classes.PumlClassBuilder
-import de.raphaelbudde.jpa2puml.process.PlantumlOutputType
-import de.raphaelbudde.jpa2puml.process.PlantumlProcess.transformPumlTo
+import de.raphaelbudde.jpa2puml.Jpa2puml
+import de.raphaelbudde.jpa2puml.Jpa2pumlOutput
+import de.raphaelbudde.jpa2puml.Jpa2pumlSettings
+import de.raphaelbudde.jpa2puml.renderer.PlantumlOutputFormat
 import org.apache.maven.plugin.AbstractMojo
 import org.apache.maven.plugins.annotations.LifecyclePhase
 import org.apache.maven.plugins.annotations.Mojo
@@ -12,7 +11,6 @@ import org.apache.maven.plugins.annotations.Parameter
 import org.apache.maven.plugins.annotations.ResolutionScope
 import org.apache.maven.project.MavenProject
 import java.io.File
-import kotlin.collections.forEach
 
 /**
  * A Maven plugin which creates puml from classes.
@@ -28,84 +26,95 @@ class Jpa2pumlMojo : AbstractMojo() {
     @Parameter(defaultValue = $$"${project}", readonly = true, required = true)
     private lateinit var project: MavenProject
 
-    @Parameter(defaultValue = $$"${project.build.outputDirectory}", required = true, readonly = true)
-    private lateinit var classesDirectory: File
+    /**
+     * scan in all dependencies for JPA code
+     */
+    @Parameter(name = "includeClasspathElements", required = false)
+    private var includeClasspathElements: Boolean = false
 
-    @Parameter(defaultValue = $$"${project.build.directory}", required = true, readonly = true)
-    private lateinit var directory: File
-
+    /**
+     * regex of directory names to exclude
+     */
     @Parameter(name = "excludedDirectories", required = false)
     private var excludedDirectories: List<String>? = null
 
+    /**
+     * regex of file names to exclude
+     */
     @Parameter(name = "excludedFiles", required = false)
     private var excludedFiles: List<String>? = null
 
+    /**
+     * regex of class names to exclude
+     */
     @Parameter(name = "excludedClassNames", required = false)
     private var excludedClassNames: List<String>? = null
 
+    /**
+     * regex of field names to exclude
+     */
     @Parameter(name = "excludedFields", required = false)
     private var excludedFields: List<String>? = null
 
-    @Parameter(name = "outputFiles", required = false, defaultValue = $$"${project.build.directory}/${project.artifactId}-${project.version}.puml")
+    /**
+     * draw an arrow to enums
+     */
+    @Parameter(name = "drawEnumArrow", required = false)
+    private var drawEnumArrow: Boolean = false
+
+    /**
+     * draw an arrow for inheritance
+     */
+    @Parameter(name = "drawInheritanceArrow", required = false)
+    private var drawInheritanceArrow: Boolean = false
+
+    /**
+     * list of output files. Output type will be guessed by file extension (e.g. puml, png, svg, pdf)
+     */
+    @Parameter(
+        name = "outputFiles",
+        required = false,
+        defaultValue = $$"${project.build.directory}/${project.artifactId}-${project.version}.puml"
+    )
     private var outputFiles: List<String>? = null
 
     override fun execute() {
-        if (!(classesDirectory?.exists() ?: false)) {
-            log.warn("Output directory does not exist: $classesDirectory")
-            return
-        }
+        log.info("jpa2puml-maven-plugin started")
 
-        val excludedDirectoryPatterns: List<Regex> = excludedDirectories?.map { Regex(it) } ?: emptyList()
-        val excludedFilesPattern: List<Regex> = excludedFiles?.map { Regex(it) } ?: emptyList()
-        val excludedClassNamePatterns: List<Regex> = excludedClassNames?.map { Regex(it) } ?: emptyList()
-        val excludedFieldPatterns: List<Regex> = excludedFields?.map { Regex(it) } ?: emptyList()
+        val settings = Jpa2pumlSettings(
+            outputs = outputFiles
+                ?.mapNotNull { filename ->
+                    val format = PlantumlOutputFormat.fromFilename(filename)
+                    if (format != null) {
+                        Jpa2pumlOutput(filename, format)
+                    } else {
+                        log.warn("Unsupported output format $filename. Ignoring.")
+                        null
+                    }
+                } ?: listOf(),
 
-        val inheritanceArrow = true
-        val enumArrow = true
+            inputs = if (includeClasspathElements) {
+                project.compileClasspathElements.map { File(it) }
+            } else {
+                listOf(File(project.build.outputDirectory))
+            },
 
-        // TODO: search in all project.compileClasspathElements?
+            verbose = false,
 
-        val classes =
-            JavaClassFinder(
-                excludedDirectoryPatterns,
-                excludedFilesPattern,
-            ).findClassFiles(classesDirectory)
+            drawEnumArrow = drawEnumArrow,
+            drawInheritanceArrow = drawInheritanceArrow,
 
-        val pumlClassDiagram =
-            PumlClassBuilder(
-                excludedClassNamePatterns = excludedClassNamePatterns,
-                excludedFieldPatterns = listOf<Regex>()
-                    .plus(Regex("\\$.*")) // ignore $VALUES and $ENTRIES from kotlin enums
-                    .plus(excludedFieldPatterns),
-                drawInheritanceArrow = inheritanceArrow,
-                drawEnumArrow = enumArrow,
-            ).buildClassDiagram(classes)
+            addPumlHeader = true,
 
-        val puml = pumlClassDiagram.render(
-            "' Generated with jpa2puml-$version\n",
+            excludedDirectoryPatterns = excludedDirectories?.map { Regex(it) } ?: emptyList(),
+            excludedFilesPatterns = excludedFiles?.map { Regex(it) } ?: emptyList(),
+            excludedClassNamePatterns = excludedClassNames?.map { Regex(it) } ?: emptyList(),
+            excludedFieldPatterns = excludedFields?.map { Regex(it) } ?: emptyList(),
         )
 
-        (outputFiles ?: listOf())
-            .forEach { file ->
-                val format = PlantumlOutputType.fromFilename(file)
+        log.debug("Run jpa2puml-maven-plugin with settings: $settings")
+        Jpa2puml.run(settings)
 
-                if (format != null) {
-                    File(file).parentFile?.mkdirs()
-
-                    val outputStream = File(file).outputStream()
-
-                    if (format == PlantumlOutputType.puml) {
-                        outputStream.write(puml.toByteArray())
-                        outputStream.flush()
-                        outputStream.close()
-                    } else {
-                        transformPumlTo(puml, format, outputStream)
-                    }
-                } else {
-                    log.warn("Unsupported file type: $file")
-                }
-            }
-
-        log.info("jpa2puml complete.")
+        log.info("jpa2puml-maven-plugin complete")
     }
 }

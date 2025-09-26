@@ -16,9 +16,9 @@
 
     <dependencies>
         <dependency>
-            <groupId>jakarta.persistence</groupId>
-            <artifactId>jakarta.persistence-api</artifactId>
-            <version>3.2.0</version>
+            <groupId>de.raphaelbudde.jpa2puml</groupId>
+            <artifactId>example-domain</artifactId>
+            <version>1.2.2-SNAPSHOT</version>
         </dependency>
     </dependencies>
 
@@ -37,6 +37,8 @@
                     </execution>
                 </executions>
                 <configuration>
+                    <includeClasspathElements>true</includeClasspathElements>
+
                     <excludedDirectories>
                         <excludedDirectory>foo</excludedDirectory>
                         <excludedDirectory>bar</excludedDirectory>
@@ -57,6 +59,8 @@
                     <outputFiles>
                         <outputFile>${project.build.directory}/${project.artifactId}-${project.version}.puml</outputFile>
                         <outputFile>${project.build.directory}/aaa.puml</outputFile>
+                        <outputFile>${project.build.directory}/aaa.png</outputFile>
+                        <outputFile>${project.build.directory}/aaa.svg</outputFile>
                         <outputFile>${project.build.directory}/bbb/bbb.puml</outputFile>
                         <!--                        <outputFile>../ccc/ccc.puml</outputFile>-->
                         <!--                        <outputFile>${project.basedir}/ddd.puml</outputFile>-->
